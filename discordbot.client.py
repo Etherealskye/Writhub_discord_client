@@ -142,17 +142,20 @@ async def poll (ctx, arg, story_num=-1):
             description = list_display,
             colour = discord.Colour(0x8d32e3))
 
-        await ctx.send('Poll has started for story: ' + str(selected_story.title) + '\nHere is what is being merged into:' + str(branch_list[0]))
+        await ctx.send('Poll has started for story: ' + str(selected_story.title) + '\nHere is what is being merged into:\n' + str(branch_list[0].text))
         await ctx.send(embed = embed)
         await ctx.send("To vote, use w!vote <branch number>")
         poll_state = True
+        
+        for i in range(len(branch_list) - 1):
+            branch_polls.update({i:0})
     
     elif arg == "end" and poll_state:
         await ctx.send("Poll has ended, here are the results:")
         
         display = ''
         for i in range(len(branch_list) - 1): 
-            display = display + "**"+f'{i+1}'+"**. " + branch_list[i+1].text + "has " + str(branch_polls.get(i)) + " votes" 
+            display = display + "**"+f'{i+1}'+"**. " + branch_list[i+1].text + " **has " + str(branch_polls.get(i)) + " votes**" 
             if i != len(story_list) - 1:
                 display = display +  "\n"
             
@@ -170,10 +173,6 @@ async def vote (ctx,arg):
     global poll_state
     global users_voted
     global branch_polls 
-    branch_polls = {}
-    for i in range(len(branch_list) - 1):
-        branch_polls.update({i:0})
-    
     print(branch_polls)
     if poll_state:
         if not ctx.message.author in users_voted:
@@ -185,7 +184,7 @@ async def vote (ctx,arg):
             branch_polls.update({int(arg) - 1: new_value})
             print(branch_polls)
         else:
-            await ctx.send(f'{ctx.message.author}' + " has already voted!")
+            await ctx.send(f'{ctx.message.author}' + " has already voted!") 
     else:
         await ctx.send("Please start a poll first!")
 
