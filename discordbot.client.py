@@ -167,7 +167,12 @@ async def poll (ctx, arg, story_num=-1):
         await ctx.send(embed = embed)
         poll_state = False
 
+    elif arg =="start" and poll_state:
+        await ctx.send("A Poll is already running! Please use w!poll end to end that poll if it is a mistake!")
     
+    elif arg =="end" and not poll_state:
+        await ctx.send("No polls running")
+
 @writHub.command(name="vote")
 async def vote (ctx,arg):
     global poll_state
