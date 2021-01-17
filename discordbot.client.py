@@ -142,7 +142,7 @@ async def poll (ctx, arg, story_num=-1):
             description = list_display,
             colour = discord.Colour(0x8d32e3))
 
-        await ctx.send('Poll has started for story: ' + str(selected_story.title) + '\nHere is what is the original text:\n' + str(branch_list[0].text))
+        await ctx.send('Poll has started for story: ' + str(selected_story.title) + '\nHere is what the original text is:\n' + str(branch_list[0].text))
         await ctx.send(embed = embed)
         await ctx.send("To vote, use w!vote <branch number>")
         poll_state = True
