@@ -155,7 +155,7 @@ async def poll (ctx, arg, story_num=-1):
         
         display = ''
         for i in range(len(branch_list) - 1): 
-            display = display + "**"+f'{i+1}'+"**. " + branch_list[i+1].text + " **has " + str(branch_polls.get(i)) + " votes**" 
+            display = display + "**"+f'{i+1}'+"**. " + branch_list[i+1].text + " **has " + str(branch_polls.get(i)) + " vote(s)**" 
             if i != len(story_list) - 1:
                 display = display +  "\n"
             
